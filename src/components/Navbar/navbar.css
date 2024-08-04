@@ -1,0 +1,15 @@
+.container{
+    background-color: black;
+    font-size: 10px;
+}
+.log{
+    display:none
+}
+icon{
+    color: white;
+    font-size: 15px;
+}
+Button{
+    font-size: 5px;
+}
+
