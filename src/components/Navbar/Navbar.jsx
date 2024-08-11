@@ -5,8 +5,11 @@ import Stack from 'react-bootstrap/Stack';
 
 const Navbar = () => {
   const total = 25000;
-  const token = true;
+  const token = false;
   const buttonStyle = {fontSize:'10px'}
+
+  
+
   return (
     <Stack className="container" direction="horizontal" gap={3}>  
       
