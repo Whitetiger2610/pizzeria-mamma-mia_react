@@ -4,8 +4,9 @@ import { FaPizzaSlice} from "react-icons/fa";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const CardPizza = ({name, price, ingredients, img}) => {
+const CardPizza = ({key,name, price, ingredients, img, description}) => {
     const productType = "Pizza"
+ 
   return (
     <>
     <Card style={{backgroundColor:'white', width: '18rem' }}>
@@ -14,10 +15,14 @@ const CardPizza = ({name, price, ingredients, img}) => {
         <Card.Title className="d-flex justify-content-start">{productType} {name}</Card.Title>
         <hr/>
         <Card.Subtitle style={{fontSize:'15px',color:'gray',padding:'5px'}}>
+          {description}
+        </Card.Subtitle>
+        <hr/>
+        <Card.Subtitle style={{fontSize:'15px',color:'gray',padding:'5px'}}>
           Ingredientes:
         </Card.Subtitle>
         <Card.Text style={{fontSize:'15px',color:'gray'}}>
-        <FaPizzaSlice/> {ingredients[0]}, {ingredients[1]}, {ingredients[2]}, {ingredients[3]}
+        <FaPizzaSlice/>{ingredients.map(ingredient => <li key={key}>{ingredient}</li>)}
         </Card.Text>
         <hr />
         <Card.Subtitle style={{fontSize:'20px', fontWeight:'bold', padding:'10px'}}>
