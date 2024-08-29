@@ -1,22 +1,26 @@
 import './App.css'
-import Cart from './components/Cart'
-import Footer from './components/Footer'
-// import Home from './components/Home'
-// import Login from './components/Login'
 import Navbar from './components/Navbar/Navbar'
+// import Home from './components/Home'
+// import Cart from './components/Cart'
+
+// import Login from './components/Login'
 // import Register from './components/Register'
+import Pizza from './components/Pizza'
+import Footer from './components/Footer'
+
 
 function App() {
 
   return (
-    <>
+    <div className='page'>
       <Navbar/>
       {/* <Home /> */}
       {/* <Register/> */}
       {/* <Login/> */}
-      <Cart/>
+      {/* <Cart/> */}
+      <Pizza/>
       <Footer/>
-    </>
+    </div>
   )
 }
 

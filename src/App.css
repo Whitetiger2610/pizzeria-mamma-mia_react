@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+.page{
+  width: 900px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards{
+  display: grid;
+  align-items: center;
+}
