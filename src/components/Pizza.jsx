@@ -37,7 +37,7 @@ const Pizza = () => {
           Ingredientes:
         </Card.Subtitle>
         <Card.Text style={{fontSize:'15px',color:'gray'}}>
-        <FaPizzaSlice/>{pizza.ingredients.map(ingredient => <li key={pizza.id}>{ingredient}</li>)}
+        <FaPizzaSlice/>{pizza.ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)}
         </Card.Text>
         <hr />
         <Card.Subtitle style={{fontSize:'20px', fontWeight:'bold', padding:'10px'}}>
