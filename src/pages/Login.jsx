@@ -1,47 +1,49 @@
 import { useState } from 'react';
+import '../App.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const Register = () => {
-
+const Login = () => {
+    
     const [email, setEmail] = useState('')
     const [contraseña, setContraseña] = useState('')
     const onChange1 = ({ currentTarget }) => setContraseña(currentTarget.value);
-    const [confirmar, setConfirmar] = useState('')
-    const onChange2 = ({ currentTarget }) => setConfirmar(currentTarget.value);
-
     const [shown, setShown] = useState(false)
     const switchShown = () => setShown(!shown);
+
+    const myemail = "mauricio.gonzalez@gmail.com"
+    const mypassword = "123456789"
 
     const [error, setError] = useState(false)
 
     const validateData = (e) => {
         e.preventDefault()
 
-        if (!email.trim() || !contraseña.trim() || !confirmar.trim()){
-            setError(true)
 
+        if (!email.trim() || !contraseña.trim()){
+            setError(true)
         return
         }
         if (contraseña.trim().length < 6) {
             alert("contraseña debe tener mínimo 6 caracteres ")
          return
         }
-        if (contraseña.trim() !== confirmar.trim()) {
-            alert("confirmación de contraseña no coincide")
 
-         return
+        if (email === myemail & contraseña === mypassword) {
+            alert("Los datos son correctos")
+            return 
+        } else {
+            alert("Los datos son incorrectos")
         }
 
-    setError(false);
-    setEmail('');
-    setContraseña('');
-    setConfirmar('');
-
-    }
+        setError(false)
+        setEmail('');
+        setContraseña('');
+        
+ }
 
   return (
-    <Form onSubmit={validateData}>
+    <Form onSubmit={validateData} className='login'>
         {error ? <p>Todos los campos son obligatorios</p> : null}
         <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
@@ -64,22 +66,11 @@ const Register = () => {
             <Button size='sm' style={{margin:"5px"}} variant="outline-secondary" onClick={switchShown}>
             {shown ? 'Ocultar' : 'Mostrar'}</Button>
         </Form.Group>
-        <Form.Group className="mb-3">
-            <Form.Label>Confirmar contraseña</Form.Label>
-            <Form.Control 
-            type={shown ? 'text' : 'password'}
-            name="confirmar" 
-            placeholder="confirmar contraseña"
-            onChange={onChange2}
-            // onChange={(e) => setConfirmar(e.target.value)}
-            value={confirmar} />
-        </Form.Group>
         <div>
         <Button type="submit" style={{margin:"5px"}}>Enviar</Button>
         </div>
     </Form>
-
   )
 }
 
-export default Register
+export default Login

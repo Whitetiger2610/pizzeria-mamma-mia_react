@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { pizzaCart } from "../assets/pizzas"
-import CartPizza from "./CartPizza"
+import CartPizza from "../components/CartPizza"
+import '../App.css'
 
 
 const Cart = () => {
@@ -47,7 +48,7 @@ const Cart = () => {
 
   return (
 
-        <div style={{margin:"10px",display:"grid", rowGap:"5px", justifyItems:"center", alignItems:"center"}}>
+        <div className="cart">
             <h2>Carrito de Compras</h2>
             <h3>Total: $ {total}</h3>
             {pizzaList.map(pizza => 

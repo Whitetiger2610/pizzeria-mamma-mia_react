@@ -1,7 +1,7 @@
-import CardPizza from "./CardPizza"
+import CardPizza from "../components/CardPizza"
 import '../App.css'
 // import {pizzas} from "../assets/pizzas"
-import Header from "./Header"
+import Header from "../components/Header"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from "react";

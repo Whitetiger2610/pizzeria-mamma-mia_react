@@ -1,5 +1,7 @@
 .container{
-    background-color: black;
+    width:900px;
+
+    background-color: rgb(240, 233, 233);
     font-size: 10px;
 }
 .log{
@@ -10,6 +12,6 @@ icon{
     font-size: 15px;
 }
 Button{
-    font-size: 5px;
+    font-size: 4px;
 }
 
