@@ -73,7 +73,7 @@ const Register = () => {
             name="confirmar" 
             placeholder="confirmar contraseña"
             onChange={onChange2}
-            // onChange={(e) => setConfirmar(e.target.value)}
+            // onChange={(e="true") => setConfirmar(e.target.value)}
             value={confirmar} />
         </Form.Group>
         <div>

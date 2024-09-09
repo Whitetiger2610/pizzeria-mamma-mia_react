@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 
 const CardPizza = ({key,name, price, ingredients, img, description}) => {
     const productType = "Pizza"
- 
+    
   return (
     <>
     <Card style={{backgroundColor:'white', width: '18rem' }}>

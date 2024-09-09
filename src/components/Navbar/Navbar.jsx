@@ -6,11 +6,16 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { CartContext } from '../../contexts/CartContext';
+import { width } from '@fortawesome/free-brands-svg-icons/fa42Group';
 
 const NavBar = () => {
-  const total = 25000;
-  const token = false;
+  // const total = 25000;
+  // const token = false;
   const buttonStyle = {fontSize:'10px'}
+
+  const {obtenerTotal} = useContext(CartContext)
 
 
   return (
@@ -24,8 +29,8 @@ const NavBar = () => {
     // <Button className= {token == true ? 'log': null}  variant="outline-light" style={buttonStyle}><FaUserLock/> Register</Button>{' '}
     // <Button className="p-2 ms-auto" variant="outline-info" style={buttonStyle}><FaShoppingCart/> Total:$ {total.toLocaleString("de-DE")}</Button>{' '}
     // </Stack>  
-    <Navbar expand="lg" className="bg-body-tertiary">
-    <Container>
+    <Navbar expand="lg" className="bg-body-tertiary" style={{maring:"auto", overflow:"hidden", zIndex:"100"}}>
+    <Container >
       <Navbar.Brand href="#home">Pizzeria Mamma Mia</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -37,7 +42,7 @@ const NavBar = () => {
           <Link to='/profile' className="text-secondary ms-3" text-decoration-none>Profile</Link>
         </Nav>
         <Link to='/cart'>
-        <Button className="p-2 ms-auto" variant="outline-dark" style={buttonStyle}><FaShoppingCart/> Total:$ {total.toLocaleString("de-DE")}</Button>{' '}
+        <Button className="p-2 ms-auto" variant="outline-dark" style={buttonStyle}><FaShoppingCart/> Total:$ {obtenerTotal()}</Button>{' '}
         </Link>
 
       </Navbar.Collapse>

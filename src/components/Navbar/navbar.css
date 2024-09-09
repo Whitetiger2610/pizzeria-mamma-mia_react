@@ -1,8 +1,9 @@
 .container{
     width:900px;
-
+    padding: 10px;
     background-color: rgb(240, 233, 233);
     font-size: 10px;
+    display: block;
 }
 .log{
     display:none

@@ -16,7 +16,7 @@ const Login = () => {
 
     const [error, setError] = useState(false)
 
-    const validateData = (e) => {
+    const validateData = (e="true") => {
         e.preventDefault()
 
 
@@ -51,7 +51,7 @@ const Login = () => {
                 type="email"
                 name="email" 
                 placeholder="name@example.com"
-                onChange= {(e) => setEmail(e.target.value)} 
+                onChange= {(e="true") => setEmail(e.target.value)} 
                 value={email} />
         </Form.Group>
         <Form.Group className="mb-3">
