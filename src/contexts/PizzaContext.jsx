@@ -6,6 +6,9 @@ export const PizzaContext = createContext();
 
 const PizzaProvider = ({ children }) => {
   const [pizzas, setPizzas] = useState([]);
+  const [pizza, setPizza] = useState([])
+  const [error, setError] = useState(null)
+  
 
 
   useEffect (() =>{
@@ -20,6 +23,26 @@ const PizzaProvider = ({ children }) => {
     setPizzas(data)
   }
 
+  const getPizza = async(id) => {
+   
+    const url = 'http://localhost:3000/api/pizzas'
+    try{
+        const response = await fetch(`${url}/${id}`);
+        if (!response.ok){
+            throw new Error("No se encontró ninguna Pizza en ese ID")
+        }
+        const data = await response.json();
+        setPizza(data)
+        setError(null)
+
+    } catch (err){
+        setError(err.message)
+        setPizza(null)
+    } 
+}
+
+
+
 // useEffect(() => {
 //     (async () => {
 //       const response = await axios.get(
@@ -30,7 +53,7 @@ const PizzaProvider = ({ children }) => {
 //   }, []);
 
   return (
-    <PizzaContext.Provider value={{pizzas, setPizzas}}>
+    <PizzaContext.Provider value={{pizzas, setPizzas, pizza, setPizza, getPizza, error}}>
       {children}
     </PizzaContext.Provider>
   );

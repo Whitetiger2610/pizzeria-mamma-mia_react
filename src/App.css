@@ -64,10 +64,11 @@
   height: 400px;
 }
 .cart{
-  margin:2px;
+  margin:5px;
   width: 900px;
-  height: 600px;
-  /* display:grid; */
+  height: auto;
+  display:flex;
+  flex-direction: column;
   row-gap:5px;
   justify-items:center;
   /* align-items:center */

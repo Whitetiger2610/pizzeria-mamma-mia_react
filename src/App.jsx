@@ -8,11 +8,15 @@ import Pizza from './pages/Pizza'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import Footer from './components/Footer'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import PizzaProvider from './contexts/PizzaContext'
+import { useContext } from 'react'
+import { UserContext } from './contexts/UserContext'
 
 
 function App() {
+
+  const {user} = useContext(UserContext)
 
   return (
     <div className='page'>
@@ -24,11 +28,14 @@ function App() {
         {/* <Pizza/> */}
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={
+            !user.token? <Register/> :<Navigate to="/home"/> }/>
+          <Route path="/login" element={
+            !user.token? <Login/> : <Navigate to="/home"/>}/>
           <Route path="/cart" element={<Cart/>}/>
-          <Route path="/pizza/p001" element={<Pizza/>}/>
-          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/pizzas/:id" element={<Pizza/>}/>
+          <Route path="/profile" element={
+            user.token? <Profile/> : <Navigate to="/login"/>}/>
           <Route path="/404" element={<NotFound/>}/>
         </Routes>
         <Footer/>
