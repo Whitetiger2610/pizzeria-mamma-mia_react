@@ -1,58 +1,29 @@
-import { useContext, useEffect, useState } from "react"
-import { pizzaCart } from "../assets/pizzas"
-import CartPizza from "../components/CartPizza"
+import { useContext, useEffect } from "react"
 import '../App.css'
 import { CartContext } from "../contexts/CartContext"
-import { UserContext } from "../contexts/UserContext"
+import { UserContext } from "../contexts/UserContext";
+// import { UserContext } from "../contexts/UserContext"
 
 
 const Cart = () => {
-    // const [pizzaList, setPizzaList] = useState(pizzaCart)
-    // const [total, setTotal] = useState(0)
+    const {cart, agregarCart, eliminarCart, obtenerTotal, enviarCart} = useContext(CartContext);
+    const {profile} = useContext(UserContext)
+    // const {user} = useContext(UserContext)
+    const token = localStorage.getItem("token")
 
-    // useEffect(()=>{
-    //     calcularTotal();
-    // }, [pizzaList])
-
-    // const calcularTotal = () =>{
-    //     let totalPizza = 0;
-    //     pizzaList.forEach((pizza) =>{
-    //         totalPizza += pizza.price * pizza.count
-    //     });
-    //     setTotal(totalPizza)
-    // }
-
-    // const eliminarPizza = (id) => {
-    //     const nuevaPizzaList = pizzaList.filter((pizza) => {
-    //         return pizza.id !== id;
-    //     })
-    //     setPizzaList(nuevaPizzaList)
-   
-    // }
-
-    // const incrementar = (id) => {
-    //     const pizza = pizzaList.find((pizza)=> pizza.id === id)
-    //     if (pizza.count === 10) return;
-    //     pizza.count++
-    //     setPizzaList([...pizzaList])
+    useEffect(() => {
+        if (localStorage.getItem("token")){
+      profile();
+        }
+    }, [profile]);
   
-    // }
-    // const decrementar = (id) => {
-    //     const pizza = pizzaList.find((pizza)=> pizza.id === id)
-    //     if (pizza.count === 1){
-    //     eliminarPizza(id)
-    //     return;
-    //     }
-    //     pizza.count--;
-    //     setPizzaList([...pizzaList]);
-
-    // }
-    const {cart, agregarCart, eliminarCart, obtenerTotal} = useContext(CartContext);
-    const {user} = useContext(UserContext)
+    const handleSent = () => {
+      enviarCart();
+    }
 
   return (
 
-        <div className="cart">
+        <div onSubmit={handleSent} className="cart">
             {cart.map(pizza => {
                 return(
                     <div style={{width:"300px",margin:"10px",display:"flex", border:"solid black", justifyContent:"center", alignItems: "center", padding:"auto"}} key={pizza.id}>
@@ -85,23 +56,12 @@ const Cart = () => {
                     }
                     <h2>Carrito de Compras</h2>
                     <h3>Total: $ {obtenerTotal()}</h3>
-            {user.token? (<button >Pagar</button>):(<button disabled >Pagar</button>)}
+            {token? (<button onClick={handleSent} >Pagar</button>):(<button disabled >Pagar</button>)}
             
                 
         </div>
         )
 }
-            //         <CartPizza 
-            //         key={pizza.id} 
-            //         pizza ={pizza} 
-            //         deletePizza={eliminarPizza}
-            //         increment = {incrementar}
-            //         decrement = {decrementar}
-            //         />   
-            // )}
-            // <button
-            // style={{width:"100px"}}
-            // > Pagar</button>
 
         
 

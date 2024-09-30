@@ -1,10 +1,8 @@
-// import CardPizza from "../components/CardPizza"
 import '../App.css'
-// import {pizzas} from "../assets/pizzas"
 import Header from "../components/Header"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { CartContext } from "../contexts/CartContext";
 import { PizzaContext } from "../contexts/PizzaContext";
 import { Button, Card } from "react-bootstrap";
@@ -13,19 +11,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
-  // const [pizzas, setPizzas] = useState([])
-
-  // useEffect (() =>{
-  //   consultarPizzas();
-  // }, [])
-
-  // const consultarPizzas = async () =>{
-  //   const url = "http://localhost:3000/api/pizzas";
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-
-  //   setPizzas(data)
-  // }
 
   const { pizzas } = useContext (PizzaContext);
   const { agregarCart } = useContext(CartContext)
@@ -43,24 +28,11 @@ const Home = () => {
            <Row>
           {pizzas.map ((pizza) => {
             return(
-          // <CardPizza 
-          // key={pizza.id}
-          // name={pizza.name} 
-          // price={pizza.price}
-          // ingredients={pizza.ingredients}
-          // img= {pizza.img} 
-          // description = {pizza.desc}
-          // pizza = {pizzas}
-          // />
           
           <Card style={{backgroundColor:'white', width: '18rem', margin:"5px" }} key={pizza.id}>
             <Card.Img variant="top" src={pizza.img} style={{width:'auto', height:'150px'}}/>
             <Card.Body>
             <Card.Title className="d-flex justify-content-center">{productType} {pizza.name}</Card.Title>
-            {/* <hr/>
-            <Card.Subtitle style={{fontSize:'15px',color:'gray',padding:'5px'}}>
-            {pizza.desc}
-            </Card.Subtitle> */}
            <hr/>
             <Card.Subtitle style={{fontSize:'15px',color:'gray',padding:'5px'}}>
             Ingredientes:

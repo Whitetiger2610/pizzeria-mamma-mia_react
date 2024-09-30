@@ -1,58 +1,46 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../App.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { UserContext } from '../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
-    
-    const [email, setEmail] = useState('')
-    const [contraseña, setContraseña] = useState('')
-    const onChange1 = ({ currentTarget }) => setContraseña(currentTarget.value);
+
+    const [email , setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const {login} = useContext(UserContext);
     const [shown, setShown] = useState(false)
+    const navigate = useNavigate()
+
+   
     const switchShown = () => setShown(!shown);
 
-    const myemail = "mauricio.gonzalez@gmail.com"
-    const mypassword = "123456789"
-
-    const [error, setError] = useState(false)
-
-    const validateData = (e="true") => {
-        e.preventDefault()
-
-
-        if (!email.trim() || !contraseña.trim()){
-            setError(true)
-        return
-        }
-        if (contraseña.trim().length < 6) {
-            alert("contraseña debe tener mínimo 6 caracteres ")
-         return
-        }
-
-        if (email === myemail & contraseña === mypassword) {
-            alert("Los datos son correctos")
-            return 
-        } else {
-            alert("Los datos son incorrectos")
-        }
-
-        setError(false)
-        setEmail('');
-        setContraseña('');
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            
+                const response = await login(email, password);
+             
+                if (response) {
+                    navigate("/")
+                }
+           
+            }
         
- }
 
   return (
-    <Form onSubmit={validateData} className='login'>
-        {error ? <p>Todos los campos son obligatorios</p> : null}
+    <Form onSubmit={handleSubmit} className='login'>
+        <p>Todos los campos son obligatorios</p>
         <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
             <Form.Control 
                 type="email"
                 name="email" 
                 placeholder="name@example.com"
-                onChange= {(e="true") => setEmail(e.target.value)} 
-                value={email} />
+                onChange = {(e) => setEmail(e.target.value)}  
+                value={email}/>
+                
         </Form.Group>
         <Form.Group className="mb-3">
             <Form.Label>Contraseña</Form.Label>
@@ -60,9 +48,8 @@ const Login = () => {
             type={shown ? 'text' : 'password'}
             name="contraseña" 
             placeholder="contraseña"
-            onChange={onChange1}
-            // onChange= {(e) => setContraseña(e.target.value)} 
-            value={contraseña} />
+            onChange= {(e) => setPassword(e.target.value)}
+            value={password} />
             <Button size='sm' style={{margin:"5px"}} variant="outline-secondary" onClick={switchShown}>
             {shown ? 'Ocultar' : 'Mostrar'}</Button>
         </Form.Group>

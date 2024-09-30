@@ -9,6 +9,7 @@ export const CartContext = createContext();
 const CartProvider = ({children}) => {
 
     const [cart, setCart] = useState([]);
+    const [carrito, setCarrito] = useState(null)
 
 //Creación Funcion agregar
 
@@ -46,10 +47,39 @@ const obtenerTotal = () => {
     return cart.reduce ((acc, item) => acc + item.price*item.quantity, 0)
 }
 
+//Función para enviar productos del carrito al backend
+
+const enviarCart = async () => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("http://localhost:3000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          "cart": cart
+        }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+      alert(data?.error || "Envio Exitoso!");
+      localStorage.setItem("token", data.token);
+      setCarrito({cart})
+      return true;
+
+      } else {
+        alert(data?.error || "Error envío")
+        return false;
+      }
+}
+
 
   return (
     <CartContext.Provider
-    value = {{cart, setCart, agregarCart, eliminarCart,obtenerTotal}}>
+    value = {{cart, setCart, agregarCart, eliminarCart,obtenerTotal, enviarCart}}>
         {children}
     </CartContext.Provider>
   )

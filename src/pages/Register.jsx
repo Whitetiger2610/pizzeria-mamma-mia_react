@@ -1,50 +1,40 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../App.css'
+import { UserContext } from '../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
     const [email, setEmail] = useState('')
-    const [contraseña, setContraseña] = useState('')
-    const onChange1 = ({ currentTarget }) => setContraseña(currentTarget.value);
+    const [password, setPassword] = useState('')
     const [confirmar, setConfirmar] = useState('')
-    const onChange2 = ({ currentTarget }) => setConfirmar(currentTarget.value);
-
     const [shown, setShown] = useState(false)
+    const navigate = useNavigate()
+    
+
+    const {register} = useContext(UserContext)
+
+    const onChange1 = ({ currentTarget }) => setPassword(currentTarget.value);
+    const onChange2 = ({ currentTarget }) => setConfirmar(currentTarget.value);
     const switchShown = () => setShown(!shown);
 
-    const [error, setError] = useState(false)
-
-    const validateData = (e) => {
-        e.preventDefault()
-
-        if (!email.trim() || !contraseña.trim() || !confirmar.trim()){
-            setError(true)
-
-        return
-        }
-        if (contraseña.trim().length < 6) {
-            alert("contraseña debe tener mínimo 6 caracteres ")
-         return
-        }
-        if (contraseña.trim() !== confirmar.trim()) {
-            alert("confirmación de contraseña no coincide")
-
-         return
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+            const response = await register(email, password) 
+            if (response) {
+                navigate("/")
+            }
+       
         }
 
-    setError(false);
-    setEmail('');
-    setContraseña('');
-    setConfirmar('');
-
-    }
 
   return (
-    <Form onSubmit={validateData} className='reg'>
-        {error ? <p>Todos los campos son obligatorios</p> : null}
+    <Form onSubmit={handleSubmit} className='reg'>
+        <p>Todos los campos son obligatorios</p>
         <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
             <Form.Control 
@@ -62,7 +52,7 @@ const Register = () => {
             placeholder="contraseña"
             onChange={onChange1}
             // onChange= {(e) => setContraseña(e.target.value)} 
-            value={contraseña} />
+            value={password} />
             <Button size='sm' style={{margin:"5px"}} variant="outline-secondary" onClick={switchShown}>
             {shown ? 'Ocultar' : 'Mostrar'}</Button>
         </Form.Group>

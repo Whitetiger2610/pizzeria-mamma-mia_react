@@ -1,15 +1,36 @@
+import { useContext, useEffect } from 'react'
 import '../App.css'
+import { UserContext } from '../contexts/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () =>  {
 
-    const email = "mga.asesor.esolar@gmail.com"
+    const {user, profile, logout } = useContext(UserContext)
+  
+
+    useEffect(() => {
+      if (localStorage.getItem("token")){
+    profile();
+      }
+  }, [profile]);
+
+  const handleLogout = () => {
+    logout();
+  }
 
   return (
     <div className="prof">
+      {user ? (
+        <div>
         <h1>Usuario</h1>
         <hr />
-        <p>{email}</p>
-        <button>Cerrar Sesión</button>
+        <p>{user.email}</p>
+        <button onClick={handleLogout}>Cerrar Sesión</button>
+        </div>
+      ) :(
+        <p>No has iniciado sesion</p>
+        )}
+       
     </div>
   )
 }
